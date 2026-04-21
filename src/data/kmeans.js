@@ -125,6 +125,22 @@ function computeClusterMetadata(points, centroids) {
 
 export const runKMeans = (points, k) => {
   if (k <= 0) throw new Error('k must be > 0');
+  if (!points || points.length === 0) return { clusters: [], centroids: [] };
+
+  // Safety: If points are fewer than k, just return one-point clusters
+  if (points.length <= k) {
+    const pts = points.map((p, i) => ({ ...p, clusterId: i }));
+    const centroids = pts.map((p, i) => ({
+      id: i,
+      lat: p.lat,
+      lng: p.lng,
+      pointCount: 1,
+      dominantAlert: p.alertType,
+      riskLevel: p.severity === 'severe' ? 'severe' : 'moderate'
+    }));
+    return { clusters: pts, centroids };
+  }
+
   // Clone points to avoid mutating original array
   const pts = points.map(p => ({ ...p }));
   let centroids = initCentroidsPP(pts, k);

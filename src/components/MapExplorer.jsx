@@ -1,12 +1,31 @@
 // src/components/MapExplorer.jsx
 import React, { useState, useEffect, useRef, useMemo, forwardRef, useImperativeHandle } from 'react';
-import { MapContainer, TileLayer, CircleMarker, Tooltip, ZoomControl, Marker } from 'react-leaflet';
+import { MapContainer, TileLayer, CircleMarker, Tooltip, ZoomControl, Marker, useMap } from 'react-leaflet';
 import L from 'leaflet';
 import { motion } from 'framer-motion';
 import { runKMeans } from '../data/kmeans';
 import 'leaflet/dist/leaflet.css';
 
-// Cluster colors (order matches risk ranking)
+// Leaflet icon fix for production (prevents missing icon errors on Vercel)
+delete L.Icon.Default.prototype._getIconUrl;
+L.Icon.Default.mergeOptions({
+  iconRetinaUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon-2x.png',
+  iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon.png',
+  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-shadow.png',
+});
+
+// Helper component to fix map sizing issues in dynamic containers
+function MapResizeHandler() {
+  const map = useMap();
+  useEffect(() => {
+    // Invalidate size on mount and after a short delay to ensure correct rendering
+    map.invalidateSize();
+    const timer = setTimeout(() => map.invalidateSize(), 200);
+    return () => clearTimeout(timer);
+  }, [map]);
+  return null;
+}
+
 const CLUSTER_COLORS = ['#E24B4A', '#EF9F27', '#378ADD', '#639922', '#7F77DD'];
 
 // Debounce helper
@@ -184,6 +203,7 @@ const MapExplorer = forwardRef(({
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
           />
           <ZoomControl position="bottomright" />
+          <MapResizeHandler />
           
           {clusters.map(p => {
             const color = getClusterColor(p.clusterId);
@@ -220,6 +240,16 @@ const MapExplorer = forwardRef(({
             />
           ))}
         </MapContainer>
+
+        {/* Empty State Overlay */}
+        {filteredPoints.length === 0 && (
+          <div className="absolute inset-0 z-[1000] flex items-center justify-center bg-black/60 backdrop-blur-sm">
+            <div className="text-center p-8 bg-[#0f0f0f] border border-white/10 rounded-2xl shadow-2xl mx-4">
+              <p className="text-severe font-mono text-xl mb-2">No Prediction Data</p>
+              <p className="text-white/40 text-sm">Adjustment of filters required for clustering.</p>
+            </div>
+          </div>
+        )}
 
         {/* Floating Tooltip Style */}
         <style>{`
