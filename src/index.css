@@ -15,7 +15,10 @@
     scroll-behavior: smooth;
   }
   body {
-    @apply bg-[#0a0a0a] text-white antialiased;
+    background-color: #0a0a0a;
+    color: white;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
     margin: 0;
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
   }
@@ -49,6 +52,9 @@
 
   /* Frosted Glass effect */
   .glass-effect {
-    @apply bg-white/5 backdrop-blur-md border border-white/12;
+    background-color: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.125);
   }
 }

@@ -219,23 +219,6 @@ const MapExplorer = forwardRef(({
               eventHandlers={{ click: () => onHighlightCluster(c.id) }}
             />
           ))}
-
-          {blackspots.map((bs, i) => (
-            <CircleMarker
-              key={`bs-${i}`}
-              center={[bs.lat, bs.lng]}
-              radius={8}
-              pathOptions={{
-                color: '#ffffff',
-                weight: 1,
-                dashArray: '4, 4',
-                fillColor: 'transparent',
-                fillOpacity: 0
-              }}
-            >
-              <Tooltip direction="top">Historic Blackspot</Tooltip>
-            </CircleMarker>
-          ))}
         </MapContainer>
 
         {/* Floating Tooltip Style */}

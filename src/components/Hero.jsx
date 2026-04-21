@@ -183,24 +183,6 @@ export default function Hero() {
             className="text-5xl md:text-6xl font-semibold leading-none relative inline-block"
           >
             Before It Happens
-            {/* SVG underline */}
-            <svg
-              className="absolute left-0 bottom-0 w-full h-2"
-              viewBox="0 0 200 2"
-              preserveAspectRatio="none"
-            >
-              <line
-                x1="0"
-                y1="1"
-                x2="200"
-                y2="1"
-                stroke="#E24B4A"
-                strokeWidth="2"
-                strokeDasharray="200"
-                strokeDashoffset="200"
-                style={{ animation: 'underlineDraw 0.8s forwards', animationDelay: '0.5s', animationTimingFunction: 'cubic-bezier(0.25,0.1,0.25,1)' }}
-              />
-            </svg>
           </motion.h1>
           <motion.p
             className="mt-4 text-lg text-white/60 max-w-md leading-relaxed"

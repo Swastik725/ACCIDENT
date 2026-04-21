@@ -171,33 +171,35 @@ export default function AnalyticsDashboard({ onZoneSelect }) {
           {/* Chart 1 – Alert Type Distribution */}
           <div ref={alertRef}>
             <ChartCard eyebrow="ALERT COMPOSITION" title="Distribution by Alert Type" subtitle="all intervals">
-              <div className="relative flex items-center gap-8">
-                <PieChart width={200} height={200}>
-                  <Pie
-                    data={alertDistData}
-                    cx={95}
-                    cy={95}
-                    innerRadius={58}
-                    outerRadius={88}
-                    paddingAngle={3}
-                    dataKey="value"
-                    isAnimationActive={alertChartVisible}
-                    animationBegin={200}
-                    animationDuration={800}
-                  >
-                    {alertDistData.map((entry, i) => (
-                      <Cell key={i} fill={entry.color} stroke="transparent" />
-                    ))}
-                  </Pie>
-                  <ReTooltip
-                    contentStyle={{ background: '#1a1a1a', border: '0.5px solid rgba(255,255,255,0.12)', borderRadius: 6, fontSize: 11, fontFamily: 'monospace' }}
-                    itemStyle={{ color: '#ffffff' }}
-                  />
-                </PieChart>
-                {/* Center label */}
-                <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-                  <div className="text-2xl font-medium font-mono text-white">500</div>
-                  <div className="text-xs text-white/40 font-mono">alerts</div>
+              <div className="flex items-center gap-8">
+                <div className="relative">
+                  <PieChart width={200} height={200}>
+                    <Pie
+                      data={alertDistData}
+                      cx={100}
+                      cy={100}
+                      innerRadius={58}
+                      outerRadius={88}
+                      paddingAngle={3}
+                      dataKey="value"
+                      isAnimationActive={alertChartVisible}
+                      animationBegin={200}
+                      animationDuration={800}
+                    >
+                      {alertDistData.map((entry, i) => (
+                        <Cell key={i} fill={entry.color} stroke="transparent" />
+                      ))}
+                    </Pie>
+                    <ReTooltip
+                      contentStyle={{ background: '#1a1a1a', border: '0.5px solid rgba(255,255,255,0.12)', borderRadius: 6, fontSize: 11, fontFamily: 'monospace' }}
+                      itemStyle={{ color: '#ffffff' }}
+                    />
+                  </PieChart>
+                  {/* Center label */}
+                  <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
+                    <div className="text-2xl font-medium font-mono text-white">500</div>
+                    <div className="text-xs text-white/40 font-mono">alerts</div>
+                  </div>
                 </div>
                 {/* Legend */}
                 <div className="flex flex-col gap-4">
