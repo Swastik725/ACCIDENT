@@ -96,4 +96,5 @@ zones.forEach(zone => {
   }
 });
 
+export const alertPoints = points;
 export default points;

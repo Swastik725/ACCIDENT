@@ -29,4 +29,5 @@ const blackspots = [
   { lat: 21.193, lng: 79.038 },
 ];
 
+export { blackspots };
 export default blackspots;

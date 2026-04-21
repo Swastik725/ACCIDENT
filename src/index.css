@@ -1,25 +1,54 @@
-/* TEMPORARY - Tailwind disabled for build test */
-body {
-  margin: 0;
-  font-family: system-ui, -apple-system, sans-serif;
+@import "tailwindcss";
+
+@theme {
+  --color-severe: #E24B4A;
+  --color-moderate: #EF9F27;
+  --color-low: #639922;
+  --color-highlight: #378ADD;
+  --color-neutral: #888780;
+  
+  --border-width-0-5: 0.5px;
 }
 
-/* Keep only the bare minimum we need for ScrollProgressBar and pulse */
-.scroll-progress {
-  height: 4px;
-  background: #EF9F27;
-  width: 0;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 50;
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-[#0a0a0a] text-white antialiased;
+    margin: 0;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  }
 }
 
-@keyframes pulse {
-  0%, 100% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.4); opacity: 0.6; }
+/* Custom scrollbar for premium feel */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #0a0a0a;
+}
+::-webkit-scrollbar-thumb {
+  background: #222;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #333;
 }
 
-.centroid-marker {
-  animation: pulse 2s infinite ease-in-out;
+@layer utilities {
+  /* Keep custom animations */
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.4); opacity: 0.6; }
+  }
+  
+  .centroid-marker {
+    animation: pulse 2s infinite ease-in-out;
+  }
+
+  /* Frosted Glass effect */
+  .glass-effect {
+    @apply bg-white/5 backdrop-blur-md border border-white/12;
+  }
 }

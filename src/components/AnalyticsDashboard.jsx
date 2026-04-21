@@ -132,15 +132,14 @@ export default function AnalyticsDashboard({ onZoneSelect }) {
 
   // Helper to handle row click
   const handleRowClick = (zoneIdx) => {
-    // scroll to map explorer
+    // scroll to map explorer section
     const mapEl = document.getElementById('map-explorer');
     if (mapEl) {
       mapEl.scrollIntoView({ behavior: 'smooth' });
-      // after a short delay, call the highlight method on the map component via a custom event
-      setTimeout(() => {
-        const ev = new CustomEvent('highlight-cluster', { detail: { index: zoneIdx } });
-        window.dispatchEvent(ev);
-      }, 600);
+    }
+    // High-level state update in App.jsx
+    if (onZoneSelect) {
+      onZoneSelect(zoneIdx);
     }
   };
 
