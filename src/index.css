@@ -1,0 +1,25 @@
+/* TEMPORARY - Tailwind disabled for build test */
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+/* Keep only the bare minimum we need for ScrollProgressBar and pulse */
+.scroll-progress {
+  height: 4px;
+  background: #EF9F27;
+  width: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 50;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.4); opacity: 0.6; }
+}
+
+.centroid-marker {
+  animation: pulse 2s infinite ease-in-out;
+}
