@@ -133,7 +133,7 @@ export default function TimeHeatmap() {
                         <div className="text-xs text-white/40 font-mono">RECALL vs BLACKSPOTS</div>
                       </div>
                       <div className="text-xs text-white/30 font-mono">
-                        Severe zones shown in red — matches thesis KDE output
+                        
                       </div>
                     </div>
                   </div>
