@@ -94,7 +94,7 @@ export default function Footer() {
               IIIT Hyderabad
             </a>
             <span className="text-white/20">•</span>
-            <span>Built as a student project by Swastik Goswami</span>
+            <span>Built as a student project by Swastik Goswami(and team)</span>
           </div>
           <div className="flex items-center gap-1.5">
             <span className="text-emerald-400">●</span>
